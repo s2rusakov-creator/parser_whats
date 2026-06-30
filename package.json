@@ -1,17 +1,23 @@
 {
   "name": "contacts-viewer",
-  "version": "1.0.0",
-  "description": "Scrape a WhatsApp group and connect members based on signals extracted from their messages and profiles.",
+  "version": "2.0.0",
+  "description": "Scrape a WhatsApp group, classify what each member does (LLM), group by occupation, and export.",
   "type": "commonjs",
   "main": "scrape.js",
   "scripts": {
     "scrape": "node scrape.js",
+    "enrich": "node enrich.js",
     "match": "node match.js",
+    "export": "node export.js",
+    "pipeline": "node enrich.js && node match.js && node export.js",
     "view": "node view.js"
   },
   "dependencies": {
     "qrcode-terminal": "^0.12.0",
     "whatsapp-web.js": "^1.26.0"
+  },
+  "optionalDependencies": {
+    "exceljs": "^4.4.0"
   },
   "license": "MIT"
 }
