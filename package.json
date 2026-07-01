@@ -3,8 +3,10 @@
   "version": "2.0.0",
   "description": "Scrape a WhatsApp group, classify what each member does (LLM), group by occupation, and export.",
   "type": "commonjs",
-  "main": "scrape.js",
+  "main": "server.js",
   "scripts": {
+    "start": "node server.js",
+    "panel": "node server.js",
     "scrape": "node scrape.js",
     "enrich": "node enrich.js",
     "match": "node match.js",
@@ -13,6 +15,7 @@
     "view": "node view.js"
   },
   "dependencies": {
+    "qrcode": "^1.5.4",
     "qrcode-terminal": "^0.12.0",
     "whatsapp-web.js": "^1.26.0"
   },

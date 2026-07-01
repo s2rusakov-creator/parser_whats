@@ -41,6 +41,25 @@ cp .env.example .env   # then fill in GIGACHAT_AUTH_KEY (PowerShell: copy .env.e
 minute). `exceljs` is an *optional* dependency — installed it gives you a
 formatted `.xlsx`; without it you still get CSV + JSON.
 
+## Easiest: the web panel (`npm start`)
+
+```bash
+npm start        # then open http://localhost:5173
+```
+
+A light-theme control panel that does the whole flow in the browser:
+
+1. **Log in** — scan the QR shown on the page (also printed to the terminal).
+2. **Pick a group** — your groups load as a searchable list; click **Парсить**.
+3. **Watch progress** — scrape → classify → group → export, with a live log.
+4. **Browse results** — people grouped by what they do, with CSV/JSON/XLSX
+   download buttons.
+
+The panel runs the same pipeline as the CLI below, so you still need
+`GIGACHAT_AUTH_KEY` in `.env` for the classify step. Prefer the CLI? It's all
+still here — use the steps below. Use the panel **or** the CLI at a time (they
+share one WhatsApp session).
+
 ## Step 1 — Scrape (`npm run scrape`)
 
 1. A **QR code** prints to the terminal. On your phone:
