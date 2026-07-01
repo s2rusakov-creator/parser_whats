@@ -8,10 +8,17 @@
 
 require('./lib/env').load();
 const path = require('path');
+const fs = require('fs');
 
 const ROOT = __dirname;
 const DATA_DIR = path.join(ROOT, 'data');
 const OUT_DIR = path.join(ROOT, 'out');
+
+// If the bundled Russian trusted CA is present, use it by default so GigaChat's
+// TLS chain validates without weakening security. An explicit GIGACHAT_CA_CERT
+// still wins.
+const BUNDLED_CA = path.join(ROOT, 'certs', 'russian_trusted_ca.pem');
+const defaultCaCert = fs.existsSync(BUNDLED_CA) ? BUNDLED_CA : '';
 
 function envInt(name, fallback) {
   const v = parseInt(process.env[name], 10);
@@ -73,7 +80,7 @@ module.exports = {
       // GigaChat uses Russian Ministry-of-Digital-Development root certs that
       // Node may not trust on Windows. Point this at the CA bundle, or set
       // GIGACHAT_INSECURE_TLS=1 to skip verification (less safe).
-      caCertPath: process.env.GIGACHAT_CA_CERT || '',
+      caCertPath: process.env.GIGACHAT_CA_CERT || defaultCaCert,
       insecureTls: envBool('GIGACHAT_INSECURE_TLS', false),
       oauthUrl:
         process.env.GIGACHAT_OAUTH_URL ||
