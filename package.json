@@ -12,7 +12,8 @@
     "match": "node match.js",
     "export": "node export.js",
     "pipeline": "node enrich.js && node match.js && node export.js",
-    "view": "node view.js"
+    "view": "node view.js",
+    "purge": "node purge.js"
   },
   "dependencies": {
     "qrcode": "^1.5.4",

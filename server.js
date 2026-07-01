@@ -176,9 +176,13 @@ const server = http.createServer(async (req, res) => {
   res.end('Not found');
 });
 
-server.listen(PORT, () => {
+// Bind to loopback only by default: the panel has no auth and exposes group
+// data, scraping control, and PII downloads. Binding to all interfaces would
+// let anyone on your Wi-Fi/LAN reach it. Set HOST=0.0.0.0 to override on purpose.
+const HOST = process.env.HOST || '127.0.0.1';
+server.listen(PORT, HOST, () => {
   wa.start(); // boot WhatsApp client immediately
-  console.log(`\n  parser_whats панель → http://localhost:${PORT}`);
+  console.log(`\n  parser_whats панель → http://localhost:${PORT}  (только этот компьютер)`);
   console.log('  (QR для входа появится в браузере и здесь в терминале)\n');
 });
 
