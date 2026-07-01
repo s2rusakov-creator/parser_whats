@@ -48,6 +48,14 @@ module.exports = {
     contactDelayMs: envInt('SCRAPE_CONTACT_DELAY_MS', 200),
     // How long to wait for the contact list to sync after login (ms).
     syncTimeoutMs: envInt('SCRAPE_SYNC_TIMEOUT_MS', 120000),
+    // Pin the WhatsApp Web build to a known-good version. Without this the
+    // client often hangs at "Loading 99%" before the `ready` event when the
+    // library's bundled version drifts from live WhatsApp Web. Update the
+    // version in the URL (or via WWEB_REMOTE_PATH) if it ever hangs again —
+    // latest list: https://github.com/wppconnect-team/wa-version
+    webRemotePath:
+      process.env.WWEB_REMOTE_PATH ||
+      'https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/2.3000.1042455848-alpha.html',
   },
 
   llm: {

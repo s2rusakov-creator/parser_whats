@@ -113,9 +113,16 @@ async function main() {
 
   const client = new Client({
     authStrategy: new LocalAuth(),
+    // Pin the web build so the client doesn't hang at "Loading 99%".
+    webVersionCache: { type: 'remote', remotePath: config.scrape.webRemotePath },
     puppeteer: {
       headless: config.scrape.headless,
-      args: ['--no-sandbox', '--disable-setuid-sandbox'],
+      args: [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        '--disable-gpu',
+        '--disable-dev-shm-usage',
+      ],
     },
   });
 
