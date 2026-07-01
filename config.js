@@ -62,7 +62,12 @@ module.exports = {
     provider: process.env.LLM_PROVIDER || 'gigachat',
     // GigaChat credentials / options (see .env.example).
     gigachat: {
+      // Provide EITHER the ready-made base64 Authorization key...
       authKey: process.env.GIGACHAT_AUTH_KEY || '',
+      // ...OR the Client ID + Client Secret separately — the client will
+      // base64-encode "id:secret" for you.
+      clientId: process.env.GIGACHAT_CLIENT_ID || '',
+      clientSecret: process.env.GIGACHAT_CLIENT_SECRET || '',
       scope: process.env.GIGACHAT_SCOPE || 'GIGACHAT_API_PERS',
       model: process.env.GIGACHAT_MODEL || 'GigaChat-Pro',
       // GigaChat uses Russian Ministry-of-Digital-Development root certs that
