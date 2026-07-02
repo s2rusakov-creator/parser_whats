@@ -120,16 +120,20 @@ All tunables live in [config.js](config.js) and can be overridden via `.env`
 
 ```
 parser_whats/
+├── server.js              # web control panel (npm start) — main entry point
 ├── config.js              # central config (paths, tunables, category aliases)
 ├── .env.example           # copy to .env; GigaChat key + overrides
 ├── lib/
 │   ├── env.js             # tiny .env loader (no dotenv dep)
-│   └── gigachat.js        # GigaChat client: OAuth token + chat + retries
-├── scrape.js              # stage 1: sync, load history, export members
+│   ├── gigachat.js        # GigaChat client: OAuth token + chat + retries
+│   └── whatsapp.js        # WhatsApp client for the panel (state, QR, scrape)
+├── scrape.js              # stage 1 (CLI): sync, load history, export members
 ├── enrich.js              # stage 2: LLM classification (+ cache)
 ├── match.js               # stage 3: group by occupation
 ├── export.js              # stage 4: xlsx/csv/json
-├── view.js                # local web viewer
+├── purge.js               # delete local personal data (npm run purge)
+├── view.js                # simple static viewer (alternative to the panel)
+├── certs/                 # bundled Russian trusted CA for GigaChat TLS
 └── data/ , out/           # created on first run (gitignored)
 ```
 
